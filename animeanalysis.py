@@ -59,6 +59,11 @@ plt.title("Episodes vs Rating")
 plt.xlabel("Episodes")
 plt.ylabel("Rating")
 
+
+
+
+
+
 MILESTONE 2:
 
 import pandas as pd
