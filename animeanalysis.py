@@ -147,6 +147,22 @@ print("Tree 2 Train MSE:",
       mean_squared_error(y_train, train_pred_tree2))
 print("Tree 2 Test MSE:",
       mean_squared_error(y_test, y_pred_tree2))
+mse_values = [
+    0.5779529395106877,
+    0.5803327883030979,
+    0.4062300318001241,
+    0.5449297694500203
+]
+labels = [
+    "Tree 1 Train",
+    "Tree 1 Test",
+    "Tree 2 Train",
+    "Tree 2 Test"
+]
+plt.bar(labels, mse_values)
+plt.title("Decision Tree MSE Comparison")
+plt.xlabel("Dataset")
+plt.ylabel("MSE")
 
 
 plt.scatter(y_test, y_test_pred)
@@ -155,12 +171,14 @@ plt.ylabel("Predicted Rating")
 plt.title("Linear Regression: Actual vs Predicted")
 
 residuals = y_test - y_test_pred
-
+plt.figure()
 plt.scatter(y_test_pred, residuals)
+plt.axhline(y=0, color='red')
 plt.xlabel("Predicted Ratings")
 plt.ylabel("Residuals")
 plt.title("Residual Plot")
 
+plt.figure()
 pd.Series(residuals).hist()
 plt.title("Distribution of Residuals")
 plt.xlabel("Residuals")
@@ -194,21 +212,17 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
 anime = pd.read_csv("anime.csv")
-
 anime = anime.dropna()
 
 anime = anime[anime['episodes'] != 'Unknown']
-
 anime['episodes'] = anime['episodes'].astype(int)
 
 features = anime[['rating', 'members', 'episodes']]
 
 scaler = StandardScaler()
-
 scaled_features = scaler.fit_transform(features)
 
 kmeans = KMeans(n_clusters=3, random_state=42)
-
 anime['cluster'] = kmeans.fit_predict(scaled_features)
 
 sns.scatterplot(
@@ -245,7 +259,10 @@ for i in range(1000):
     differences.append(diff)
 
 pd.Series(differences).hist(bins=30)
-
+plt.axvline(
+    observed_difference,
+    color='red',
+    linewidth=2)
 plt.title("Permutation Test Distribution")
 plt.xlabel("Difference in Means")
 plt.ylabel("Frequency")
