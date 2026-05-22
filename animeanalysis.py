@@ -191,6 +191,7 @@ scores = [
 
 labels = ["Depth 3", "Depth 10"]
 
+plt.figure()
 plt.bar(labels, scores)
 plt.title("Decision Tree R2 Comparison")
 plt.ylabel("R2 Score")
@@ -268,7 +269,6 @@ plt.xlabel("Difference in Means")
 plt.ylabel("Frequency")
 
 p_value = np.mean(np.abs(differences) >= abs(observed_difference))
-
 p_value
 
 The observed difference in ratings was unlikely to occur by chance, suggesting a significant difference between TV and Movie anime ratings.
